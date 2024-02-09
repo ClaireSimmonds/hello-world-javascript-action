@@ -30,7 +30,6 @@ function unixTimestampFromDate(timestring) {
 }
 
 function getPRSubmittedEvent(context) {
-  const repo = `${context.payload.organization}/${context.payload.repository}`
   const github_user = `${context.payload.sender.login}`
 
   const event = {
@@ -39,15 +38,15 @@ function getPRSubmittedEvent(context) {
       context.payload.pull_request.created_at
     ),
     priority: 'normal',
-    text: `"${context.payload.changed_files} files changed by ${github_user} with ${context.payload.additions} additions and ${context.payload.deletions} deletions."`,
-    title: `"%%%[Pull Request #${context.payload.number}](${context.payload.pull_request.url}) opened in ${repo}: ${context.payload.pull_request.title}%%%"`,
+    text: `${context.payload.pull_request.changed_files} files changed by ${github_user} with ${context.payload.pull_request.additions} additions and ${context.payload.pull_request.deletions} deletions.`,
+    title: `%%%[Pull Request #${context.payload.number}](${context.payload.pull_request.url}) opened in ${context.payload.repository.full_name}: ${context.payload.pull_request.title}%%%`,
     tags: [
       'metric:contributor_activity',
       'event_type:pull_request',
       'action:opened',
-      `"draft:${context.payload.pull_request.draft}"`,
-      `"repo:${repo}"`,
-      `"actor:${github_user}"`
+      `draft:${context.payload.pull_request.draft}`,
+      `repo:${context.payload.repository.full_name}`,
+      `actor:${github_user}`
     ]
   }
 
