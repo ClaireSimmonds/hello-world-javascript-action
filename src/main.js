@@ -13,7 +13,7 @@ async function run() {
     )
     const context = github.context
 
-    if (context.payload.pull_request && context.payload.action === 'opened') {
+    if (context.payload.pull_request) {
       const event_body = getPRSubmittedEvent(context)
 
       // Output the payload for debugging
