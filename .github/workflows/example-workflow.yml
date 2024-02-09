@@ -15,5 +15,5 @@ jobs:
         uses: actions/checkout@v4
       - name: Test action
         uses: ./
-          with:
-            repo-token: ${{ secrets.GITHUB_TOKEN  }}
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN  }}
