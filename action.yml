@@ -4,15 +4,14 @@ author: GitHub Actions
 
 # Define your inputs here.
 inputs:
-  who-to-greet:
-    description: Who to greet
+  repo-token:
+    description:
+      'Token for the repository. Can be passed in using {{ secrets.GITHUB_TOKEN
+      }}'
     required: true
-    default: World
 
 # Define your outputs here.
 outputs:
-  time:
-    description: The time we greeted you
 
 runs:
   using: node20
