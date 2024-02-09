@@ -2,7 +2,8 @@ name: Example Workflow
 
 on:
   pull_request:
-    types: [opened]
+    types: [opened, reopened]
+
 
 jobs:
   demo:
@@ -10,8 +11,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print to Log
-        id: print-to-log
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test action
         uses: ./
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN  }}
+          with:
+            repo-token: ${{ secrets.GITHUB_TOKEN  }}
