@@ -11,8 +11,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - name: Test action
-        id: test-action
-        uses: ./
+      - uses: ./
           with:
             repo-token: ${{ secrets.GITHUB_TOKEN  }}
