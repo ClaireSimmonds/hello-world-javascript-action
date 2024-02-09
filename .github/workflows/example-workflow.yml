@@ -4,13 +4,16 @@ on:
   pull_request:
     types: [opened, reopened]
 
+
 jobs:
   demo:
     name: Testing stuff
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: ./
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Test action
+        uses: ./
           with:
             repo-token: ${{ secrets.GITHUB_TOKEN  }}
