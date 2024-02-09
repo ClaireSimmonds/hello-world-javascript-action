@@ -12,6 +12,6 @@ jobs:
     steps:
       - name: Print to Log
         id: print-to-log
-        uses: ClaireSimmonds/hello-world-javascript-action@main
+        uses: ./
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN  }}

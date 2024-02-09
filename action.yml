@@ -10,9 +10,6 @@ inputs:
       }}'
     required: true
 
-# Define your outputs here.
-outputs:
-
 runs:
   using: node20
   main: dist/index.js
