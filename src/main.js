@@ -12,8 +12,6 @@ async function run() {
       core.getInput('repo-token', { required: true })
     )
     const context = github.context
-    core.info(`Github context: ${JSON.stringify(context)}`)
-
     if (context.eventName === 'pull_request') {
       const dd_event = getPRSubmittedEvent(context)
 
