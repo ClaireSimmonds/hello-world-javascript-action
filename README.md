@@ -18,12 +18,6 @@ follow the below instructions:
 1. Click **Create repository**
 1. Clone your new repository
 
-> [!CAUTION]
->
-> Make sure to remove or update the [`CODEOWNERS`](./CODEOWNERS) file! For
-> details on how to use this file, see
-> [About code owners](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners).
-
 ## Usage
 
 Here's an example of how to use this action:
