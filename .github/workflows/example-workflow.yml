@@ -2,10 +2,16 @@ name: Example Workflow
 
 on:
   pull_request:
-    types: [opened, reopened]
 
 
 jobs:
+  dump:
+    name: Dump context
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v2
   demo:
     name: Testing stuff
     runs-on: ubuntu-latest
