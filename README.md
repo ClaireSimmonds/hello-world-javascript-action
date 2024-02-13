@@ -26,7 +26,7 @@ follow the below instructions:
 
 ## Usage
 
-Here's an example of how to use this action in a workflow file:
+Here's an example of how to use this action:
 
 ```yaml
 name: Example Workflow
