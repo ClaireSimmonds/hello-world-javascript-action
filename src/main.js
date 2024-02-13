@@ -20,6 +20,9 @@ async function run() {
       // Output the generated event for debugging
       core.info(`DD event: ${JSON.stringify(dd_event)}`)
     }
+    else {
+      core.info('Are we here then?')
+    }
   } catch (error) {
     // Fail the workflow step if an error occurs
     core.setFailed(error.message)
