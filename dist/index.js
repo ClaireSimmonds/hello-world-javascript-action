@@ -28488,13 +28488,14 @@ async function run() {
       core.getInput('repo-token', { required: true })
     )
     const context = github.context
-    core.info(`Github context: ${JSON.stringify(context)}`)
-
-    if (context.event_name === 'pull_request') {
+    if (context.eventName === 'pull_request') {
       const dd_event = getPRSubmittedEvent(context)
 
       // Output the generated event for debugging
+      core.info('This should print')
       core.info(`DD event: ${JSON.stringify(dd_event)}`)
+    } else {
+      core.info('Are we here then?')
     }
   } catch (error) {
     // Fail the workflow step if an error occurs
@@ -28507,10 +28508,10 @@ function unixTimestampFromDate(timestring) {
 }
 
 function getPRSubmittedEvent(context) {
-  const github_user = context.event.sender.login
-  const repo = context.event.repository.full_name
-  const pull_request = context.event.pull_request
-  const event_body = `${pull_request.files_changed} files changed by ${github_user} with ${pull_request.additions} additions and ${pull_request.deletions} deletions.`
+  const github_user = context.payload.sender.login
+  const repo = context.payload.repository.full_name
+  const pull_request = context.payload.pull_request
+  const event_body = `${pull_request.changed_files} files changed by ${github_user} with ${pull_request.additions} additions and ${pull_request.deletions} deletions.`
   const event_title = `%%%[Pull Request #${pull_request.number}](${pull_request.url}) opened in ${repo}: ${pull_request.title}%%%`
 
   return {
@@ -28523,7 +28524,7 @@ function getPRSubmittedEvent(context) {
       'metric:contributor_activity',
       'event_type:pull_request',
       'action:opened',
-      `draft:${context.event.pull_request.draft}`,
+      `draft:${pull_request.draft}`,
       `repo:${repo}`,
       `actor:${github_user}`
     ]

@@ -18,8 +18,7 @@ async function run() {
       // Output the generated event for debugging
       core.info('This should print')
       core.info(`DD event: ${JSON.stringify(dd_event)}`)
-    }
-    else {
+    } else {
       core.info('Are we here then?')
     }
   } catch (error) {
