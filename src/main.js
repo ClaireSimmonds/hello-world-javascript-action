@@ -18,6 +18,7 @@ async function run() {
       const dd_event = getPRSubmittedEvent(context)
 
       // Output the generated event for debugging
+      core.info('This should print')
       core.info(`DD event: ${JSON.stringify(dd_event)}`)
     }
     else {
