@@ -47,7 +47,7 @@ function getPRSubmittedEvent(context) {
       'metric:contributor_activity',
       'event_type:pull_request',
       'action:opened',
-      `draft:${context.payload.pull_request.draft}`,
+      `draft:${pull_request.draft}`,
       `repo:${repo}`,
       `actor:${github_user}`
     ]
