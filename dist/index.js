@@ -28488,12 +28488,13 @@ async function run() {
       core.getInput('repo-token', { required: true })
     )
     const context = github.context
+    core.info(`Github context: ${JSON.stringify(context)}`)
 
-    if (context.payload.pull_request && context.payload.action === 'opened') {
-      const event_body = getPRSubmittedEvent(context)
+    if (context.event_name === 'pull_request') {
+      const dd_event = getPRSubmittedEvent(context)
 
-      // Output the payload for debugging
-      core.info(`The event payload: ${JSON.stringify(event_body)}`)
+      // Output the generated event for debugging
+      core.info(`DD event: ${JSON.stringify(dd_event)}`)
     }
   } catch (error) {
     // Fail the workflow step if an error occurs
@@ -28506,28 +28507,27 @@ function unixTimestampFromDate(timestring) {
 }
 
 function getPRSubmittedEvent(context) {
-  const repo = `${context.payload.organization}/${context.payload.repository}`
-  const github_user = `${context.payload.sender.login}`
+  const github_user = context.event.sender.login
+  const repo = context.event.repository.full_name
+  const pull_request = context.event.pull_request
+  const event_body = `${pull_request.files_changed} files changed by ${github_user} with ${pull_request.additions} additions and ${pull_request.deletions} deletions.`
+  const event_title = `%%%[Pull Request #${pull_request.number}](${pull_request.url}) opened in ${repo}: ${pull_request.title}%%%`
 
-  const event = {
+  return {
     alert_type: 'info',
-    date_happened: unixTimestampFromDate(
-      context.payload.pull_request.created_at
-    ),
+    date_happened: unixTimestampFromDate(pull_request.created_at),
     priority: 'normal',
-    text: `"${context.payload.changed_files} files changed by ${github_user} with ${context.payload.additions} additions and ${context.payload.deletions} deletions."`,
-    title: `"%%%[Pull Request #${context.payload.number}](${context.payload.pull_request.url}) opened in ${repo}: ${context.payload.pull_request.title}%%%"`,
+    text: event_body,
+    title: event_title,
     tags: [
       'metric:contributor_activity',
       'event_type:pull_request',
       'action:opened',
-      `"draft:${context.payload.pull_request.draft}"`,
-      `"repo:${repo}"`,
-      `"actor:${github_user}"`
+      `draft:${context.event.pull_request.draft}`,
+      `repo:${repo}`,
+      `actor:${github_user}`
     ]
   }
-
-  return event
 }
 
 module.exports = {
