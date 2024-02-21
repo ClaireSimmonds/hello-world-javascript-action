@@ -10,6 +10,14 @@ permissions:
   contents: read
 
 jobs:
+  test-env:
+    name: Say Something
+    runs-on: ubuntu-latest
+    environment: ci
+
+    steps:
+      - run: echo "i am here"
+
   test-javascript:
     name: JavaScript Tests
     runs-on: ubuntu-latest
