@@ -6,6 +6,8 @@ on:
       greeting:
         type: string
         required: true
+      environment:
+        type: string
 
 permissions:
   contents: read
@@ -13,6 +15,7 @@ permissions:
 jobs:
   print-stuff:
     runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
     steps:
       - name: Print greeting
         run: echo Say ${{ inputs.greeting }}
