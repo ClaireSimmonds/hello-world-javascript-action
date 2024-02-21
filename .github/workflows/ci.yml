@@ -19,14 +19,15 @@ jobs:
       - run: echo "i am here"
 
   test-env-2:
-    name: Say Something Else
+    name: Always Fails
     runs-on: ubuntu-latest
     environment:
     needs:
       - test-env
 
     steps:
-      - run: echo "hiiiiiiiii"
+      - run: |
+          exit 1
 
   test-javascript:
     name: JavaScript Tests
