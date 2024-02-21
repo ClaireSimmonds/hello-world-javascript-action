@@ -21,7 +21,7 @@ jobs:
   test-env-2:
     name: Say Something Else
     runs-on: ubuntu-latest
-    environment: ci
+    environment:
     needs:
       - test-env
 
