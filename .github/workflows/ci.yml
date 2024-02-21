@@ -18,6 +18,16 @@ jobs:
     steps:
       - run: echo "i am here"
 
+  test-env-2:
+    name: Say Something Else
+    runs-on: ubuntu-latest
+    environment: ci
+    needs:
+      - test-env
+
+    steps:
+      - run: echo "hiiiiiiiii"
+
   test-javascript:
     name: JavaScript Tests
     runs-on: ubuntu-latest
