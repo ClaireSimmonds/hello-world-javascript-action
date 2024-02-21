@@ -6,14 +6,16 @@ on:
       greeting:
         type: string
         required: true
+      environment:
+        type: string
 
 permissions:
   contents: read
 
 jobs:
-  test-env:
-    name: Say Something
+  print-stuff:
     runs-on: ubuntu-latest
-
+    environment: ${{ inputs.environment }}
     steps:
-      - run: echo "Say ${{ inputs.greeting }}"
+      - name: Print greeting
+        run: echo Say ${{ inputs.greeting }}

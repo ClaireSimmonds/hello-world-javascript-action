@@ -11,15 +11,14 @@ permissions:
 
 jobs:
   test-env:
-    name: Say Something
-    runs-on: ubuntu-latest
+    name: Say Hello
     uses: ./.github/workflows/say-something.yml
     with:
       greeting: hello
+      environment: ci
 
   test-env-2:
-    name: Always Fails
-    runs-on: ubuntu-latest
+    name: Say Something Different
     uses: ./.github/workflows/say-something.yml
     with:
       greeting: hi
