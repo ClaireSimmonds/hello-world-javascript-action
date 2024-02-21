@@ -1,0 +1,19 @@
+name: Say Something
+
+on:
+  workflow_call:
+    inputs:
+      greeting:
+        type: string
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  test-env:
+    name: Say Something
+    runs-on: ubuntu-latest
+
+    steps:
+      - run: echo "Say ${{ inputs.greeting }}"

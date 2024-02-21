@@ -13,21 +13,18 @@ jobs:
   test-env:
     name: Say Something
     runs-on: ubuntu-latest
-    environment: ci
-
-    steps:
-      - run: echo "i am here"
+    uses: ./.github/workflows/say-something.yml
+    with:
+      greeting: hello
 
   test-env-2:
     name: Always Fails
     runs-on: ubuntu-latest
-    environment: ci
+    uses: ./.github/workflows/say-something.yml
+    with:
+      greeting: hi
     needs:
       - test-env
-
-    steps:
-      - run: |
-          exit 1
 
   test-javascript:
     name: JavaScript Tests
