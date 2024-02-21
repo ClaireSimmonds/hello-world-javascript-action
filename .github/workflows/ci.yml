@@ -15,6 +15,7 @@ jobs:
     uses: ./.github/workflows/say-something.yml
     with:
       greeting: hello
+      environment: ci
 
   test-env-2:
     name: Say Something Different
