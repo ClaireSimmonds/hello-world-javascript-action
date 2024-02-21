@@ -21,7 +21,7 @@ jobs:
   test-env-2:
     name: Always Fails
     runs-on: ubuntu-latest
-    environment:
+    environment: ci
     needs:
       - test-env
 
